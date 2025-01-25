@@ -13,7 +13,7 @@ export function Player() {
     position: [0, 5, 0],
   }))
 
-  const JUMP_FORCE = 3
+  const JUMP_FORCE = 3.5
 
   const { moveForward, moveLeft, moveBackward, moveRight, jump } = useKeyboard()
 
@@ -30,7 +30,8 @@ export function Player() {
   useFrame(() => {
     // Suaviza el movimiento de la cámara
     const currentPos = new Vector3(pos.current[0], pos.current[1], pos.current[2])
-    camera.position.lerp(currentPos, 0.1)
+    // no suavizar
+    camera.position.copy(currentPos)
 
     // Controla el movimiento del jugador
     const direction = new Vector3()
@@ -41,7 +42,7 @@ export function Player() {
     // Controla el salto
     api.velocity.set(direction.x, vel.current[1], direction.z)
     if (jump && Math.abs(vel.current[1]) < 0.05) {
-      console.log('jump')
+      s
       api.velocity.set(vel.current[0], JUMP_FORCE, vel.current[2])
     }
   })

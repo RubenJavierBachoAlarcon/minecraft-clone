@@ -1,12 +1,9 @@
 import { Cube } from './Cube'
+import { useStore } from '../hooks/useStore'
 
 export function Cubes() {
-  return (
-    <>
-      <Cube id={1} position={[0, 5, 0]} />
-      <Cube id={2} position={[2, 0, 0]} />
-      <Cube id={3} position={[0, 0, 2]} />
-      <Cube id={4} position={[2, 0, 2]} />
-    </>
-  )
+  const cubes = useStore((state) => state.cubes)
+  return cubes.map(({ id, position, texture }) => {
+    return <Cube key={id} position={position} texture={texture} />
+  })
 }
