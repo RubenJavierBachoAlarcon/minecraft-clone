@@ -5,23 +5,24 @@ import { useStore } from '../hooks/useStore'
 export function Ground() {
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0],
-    position: [0, -0.5, 0],
+    position: [0, 0, 0],
   }))
 
   const handleOnGroundClick = (e) => {
+    if (e.button !== 2) return
     e.stopPropagation()
     const { x, y, z } = {
       x: Math.round(e.point.x),
       y: Math.round(e.point.y),
       z: Math.round(e.point.z),
     }
-
+    console.log(x, y, z)
     const { addCube } = useStore.getState()
-    addCube(x, y, z)
+    addCube(x, y + 0.5, z)
   }
 
   return (
-    <mesh onClick={handleOnGroundClick} ref={ref}>
+    <mesh onPointerDown={handleOnGroundClick} ref={ref}>
       <planeGeometry attach={'geometry'} args={[100, 100]} />
       <meshStandardMaterial attach={'material'} map={groundTexture} />
     </mesh>

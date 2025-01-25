@@ -4,6 +4,7 @@ import { useFrame } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { Vector3 } from 'three'
 import { useKeyboard } from '../hooks/useKeyboard'
+import { useStore } from '../hooks/useStore'
 
 export function Player() {
   const { camera } = useThree()
@@ -18,9 +19,13 @@ export function Player() {
   const { moveForward, moveLeft, moveBackward, moveRight, jump } = useKeyboard()
 
   const pos = useRef([0, 0, 0])
+  const updatePlayerPosition = useStore((state) => state.updatePlayerPosition)
   useEffect(() => {
-    api.position.subscribe((p) => (pos.current = p))
-  }, [api.position])
+    api.position.subscribe((p) => {
+      pos.current = p
+      updatePlayerPosition(p)
+    })
+  }, [api.position, updatePlayerPosition])
 
   const vel = useRef([0, 0, 0])
   useEffect(() => {
@@ -29,7 +34,7 @@ export function Player() {
 
   useFrame(() => {
     // Suaviza el movimiento de la cámara
-    const currentPos = new Vector3(pos.current[0], pos.current[1], pos.current[2])
+    const currentPos = new Vector3(pos.current[0], pos.current[1] + 0.75, pos.current[2])
     // no suavizar
     camera.position.copy(currentPos)
 
@@ -42,7 +47,6 @@ export function Player() {
     // Controla el salto
     api.velocity.set(direction.x, vel.current[1], direction.z)
     if (jump && Math.abs(vel.current[1]) < 0.05) {
-      s
       api.velocity.set(vel.current[0], JUMP_FORCE, vel.current[2])
     }
   })

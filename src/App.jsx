@@ -8,17 +8,20 @@ import { Cubes } from './components/Cubes'
 
 function App() {
   return (
-    <Canvas>
-      <Sky sunPosition={[100, 100, 20]} />
-      <ambientLight intensity={2} />
-      <Camera />
+    <>
+      <Canvas>
+        <Sky sunPosition={[100, 100, 20]} />
+        <ambientLight intensity={2} />
+        <Camera />
 
-      <Physics>
-        <Player />
-        <Cubes />
-        <Ground />
-      </Physics>
-    </Canvas>
+        <Physics>
+          <Player />
+          <Cubes />
+          <Ground />
+        </Physics>
+      </Canvas>
+      <h1>+</h1>
+    </>
   )
 }
 
