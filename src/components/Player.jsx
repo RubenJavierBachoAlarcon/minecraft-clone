@@ -11,7 +11,7 @@ export function Player() {
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: 'Dynamic',
-    position: [0, 5, 0],
+    position: [0, 1, 0],
   }))
 
   const JUMP_FORCE = 3.5
