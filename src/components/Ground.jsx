@@ -1,6 +1,8 @@
 import { usePlane } from '@react-three/cannon'
 import { groundTexture } from '../assets/textures'
 import { useStore } from '../hooks/useStore'
+import { useKeyboard } from '../hooks/useKeyboard'
+import { useEffect, useState } from 'react'
 
 export function Ground() {
   const [ref] = usePlane(() => ({
@@ -20,8 +22,17 @@ export function Ground() {
     addCube(x, y + 0.5, z)
   }
 
+  const [shadowsEnabled, setShadowsEnabled] = useState(true)
+  const { disable_shadows } = useKeyboard()
+
+  useEffect(() => {
+    if (disable_shadows) {
+      setShadowsEnabled((prev) => !prev)
+    }
+  }, [disable_shadows])
+
   return (
-    <mesh onPointerDown={handleOnGroundClick} ref={ref} receiveShadow>
+    <mesh onPointerDown={handleOnGroundClick} ref={ref} receiveShadow={shadowsEnabled}>
       <planeGeometry attach={'geometry'} args={[100, 100]} />
       <meshStandardMaterial attach={'material'} map={groundTexture} />
     </mesh>

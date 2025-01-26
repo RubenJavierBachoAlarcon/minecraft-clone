@@ -35,7 +35,6 @@ export function Player() {
   useFrame(() => {
     // Suaviza el movimiento de la cámara
     const currentPos = new Vector3(pos.current[0], pos.current[1] + 0.75, pos.current[2])
-    // no suavizar
     camera.position.copy(currentPos)
 
     // Controla el movimiento del jugador

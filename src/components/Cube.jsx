@@ -2,6 +2,8 @@ import { useBox } from '@react-three/cannon'
 import { textures } from '../assets/textures'
 import { useState } from 'react'
 import { useStore } from '../hooks/useStore'
+import { useKeyboard } from '../hooks/useKeyboard'
+import { useEffect } from 'react'
 
 export function Cube({ id, position, texture }) {
   const [isHovered, setIsHovered] = useState(false)
@@ -15,18 +17,26 @@ export function Cube({ id, position, texture }) {
 
   const textureMap = textures[texture]
 
+  const [shadowsEnabled, setShadowsEnabled] = useState(true)
+  const { disable_shadows } = useKeyboard()
+
+  useEffect(() => {
+    if (disable_shadows) {
+      setShadowsEnabled((prev) => !prev)
+    }
+  }, [disable_shadows])
+
   return (
     <mesh
       ref={ref}
-      castShadow
-      receiveShadow
+      castShadow={shadowsEnabled}
+      receiveShadow={shadowsEnabled}
       onPointerDown={(e) => {
+        e.stopPropagation()
         if (e.button === 0) {
-          e.stopPropagation()
           removeCube(id)
         }
         if (e.button === 2) {
-          e.stopPropagation()
           const { x, y, z } = {
             x: position[0],
             y: position[1],
@@ -69,7 +79,7 @@ export function Cube({ id, position, texture }) {
       }}
       position={position}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={isHovered ? 'grey' : 'white'} map={textureMap} />
+      <meshStandardMaterial color={isHovered ? '#a9a9a9' : 'white'} map={textureMap} />
     </mesh>
   )
 }

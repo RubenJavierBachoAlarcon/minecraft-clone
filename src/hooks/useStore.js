@@ -21,8 +21,22 @@ export const useStore = create((set) => ({
       cubes: state.cubes.filter((cube) => cube.id !== id),
     }))
   },
-  saveWorld: () => {},
-  resetWorld: () => {},
+  saveWorld: () => {
+    set((state) => {
+      localStorage.setItem('world', JSON.stringify(state.cubes))
+      return state
+    })
+  },
+  loadWorld: () => {
+    const world = localStorage.getItem('world')
+    if (world) {
+      set({ cubes: JSON.parse(world) })
+    }
+  },
+  resetWorld: () => {
+    localStorage.removeItem('world')
+    set({ cubes: [] })
+  },
   updatePlayerPosition: (playerPosition) => {
     set({ playerPosition })
   },

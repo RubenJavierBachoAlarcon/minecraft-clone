@@ -11,6 +11,11 @@ const keyMap = {
   3: 'texture_purpur_block',
   4: 'texture_chorus_flower',
   5: 'texture_chorus_plant',
+  6: 'texture_obsidian',
+  l: 'disable_shadows',
+  p: 'saveWorld',
+  r: 'resetWorld',
+  o: 'loadWorld',
 }
 
 export const useKeyboard = () => {
@@ -25,6 +30,11 @@ export const useKeyboard = () => {
     texture_purpur_block: false,
     texture_chorus_flower: false,
     texture_chorus_plant: false,
+    texture_obsidian: false,
+    disable_shadows: false,
+    saveWorld: false,
+    resetWorld: false,
+    loadWorld: false,
   })
 
   useEffect(() => {
