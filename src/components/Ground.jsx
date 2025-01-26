@@ -16,13 +16,12 @@ export function Ground() {
       y: Math.round(e.point.y),
       z: Math.round(e.point.z),
     }
-    console.log(x, y, z)
     const { addCube } = useStore.getState()
     addCube(x, y + 0.5, z)
   }
 
   return (
-    <mesh onPointerDown={handleOnGroundClick} ref={ref}>
+    <mesh onPointerDown={handleOnGroundClick} ref={ref} receiveShadow>
       <planeGeometry attach={'geometry'} args={[100, 100]} />
       <meshStandardMaterial attach={'material'} map={groundTexture} />
     </mesh>

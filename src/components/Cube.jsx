@@ -18,6 +18,8 @@ export function Cube({ id, position, texture }) {
   return (
     <mesh
       ref={ref}
+      castShadow
+      receiveShadow
       onPointerDown={(e) => {
         if (e.button === 0) {
           e.stopPropagation()
