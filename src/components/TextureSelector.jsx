@@ -1,6 +1,12 @@
 import { useStore } from '../hooks/useStore'
 import { useKeyboard } from '../hooks/useKeyboard'
 import { useEffect } from 'react'
+import endstone_brick_img from '../assets/endstone_brick.jpg'
+import purpur_block_img from '../assets/purpur_block.jpg'
+import endstone_img from '../assets/endstone.jpg'
+import chorus_flower_img from '../assets/chorus_flower.jpg'
+import chorus_plant_img from '../assets/chorus_plant.jpg'
+import obsidian_img from '../assets/obsidian.jpg'
 
 export const TextureSelector = () => {
   const texture = useStore((state) => state.texture)
@@ -52,27 +58,27 @@ export const TextureSelector = () => {
     <>
       <article className="fixed bottom-0 left-1/2 flex w-1/4 -translate-x-1/2 transform border-4 border-black">
         <img
-          src="/src/assets/endstone.jpg"
+          src={endstone_img}
           className={`w-1/6 border-4 p-3 ${texture === 'endstone' ? 'border-white bg-black/70' : 'border-gray-400 bg-black/50'}`}
         />
         <img
-          src="/src/assets/endstone_brick.jpg"
+          src={endstone_brick_img}
           className={`w-1/6 border-4 p-3 ${texture === 'endstone_brick' ? 'border-white bg-black/70' : 'border-gray-400 bg-black/50'}`}
         />
         <img
-          src="/src/assets/purpur_block.jpg"
+          src={purpur_block_img}
           className={`w-1/6 border-4 p-3 ${texture === 'purpur_block' ? 'border-white bg-black/70' : 'border-gray-400 bg-black/50'}`}
         />
         <img
-          src="/src/assets/chorus_flower.jpg"
+          src={chorus_flower_img}
           className={`w-1/6 border-4 p-3 ${texture === 'chorus_flower' ? 'border-white bg-black/70' : 'border-gray-400 bg-black/50'}`}
         />
         <img
-          src="/src/assets/chorus_plant.jpg"
+          src={chorus_plant_img}
           className={`w-1/6 border-4 p-3 ${texture === 'chorus_plant' ? 'border-white bg-black/70' : 'border-gray-400 bg-black/50'}`}
         />
         <img
-          src="/src/assets/obsidian.jpg"
+          src={obsidian_img}
           className={`w-1/6 border-4 p-3 ${texture === 'obsidian' ? 'border-white bg-black/70' : 'border-gray-400 bg-black/50'}`}
         />
       </article>
